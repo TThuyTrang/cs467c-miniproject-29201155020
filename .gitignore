@@ -1,0 +1,28 @@
+# Local Python environment and bytecode
+.venv/
+__pycache__/
+*.py[cod]
+
+# Caches and temporary verification files
+.cache/
+.tmp/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.tmp
+*.temp
+~$*
+
+# Local secrets: never commit credentials or sensitive source data.
+.env
+.env.*
+!.env.example
+credentials.json
+secrets.json
+*.pem
+*.key
+*.pfx
+
+# data/, results/, and models/ are intentionally tracked.
+# Review their contents for personal/sensitive information before adding to Git.
