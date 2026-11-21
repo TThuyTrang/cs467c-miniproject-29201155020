@@ -1,0 +1,16 @@
+CS467C: Synthetic recommendation evaluation
+Split seed: 467; train ratings: 180; test ratings: 60
+Protocol: four randomly held-out ratings per user; no selection by rating value.
+Relevance: held-out rating >= 4; rank all catalogue activities not seen in training.
+Precision@5 = held-out relevant hits / 5, averaged over all 15 users.
+Unjudged items count as no hit, not as known dislikes; fewer than five results are penalized.
+Users with no relevant test items: 1 (included with zero hits).
+Maximum measurable mean Precision@5 with this holdout: 0.333333.
+TF-IDF uses catalogue metadata; all profiles, neighbors, means and sentiment use train only.
+
+    method  precision_at_5  hits  users  recommendations
+popularity        0.040000     3     15               75
+   content        0.066667     5     15               75
+    hybrid        0.106667     8     15               75
+
+Limitations: 15 synthetic users, templated rating-conditioned journals, sparse judgments, one split, and no evidence of effectiveness on real users. Weights were fixed before evaluation; no test-set tuning or significance claim is made.

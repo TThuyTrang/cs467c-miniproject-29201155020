@@ -1,0 +1,4 @@
+method,precision_at_5,hits,users,recommendations
+popularity,0.04,3,15,75
+content,0.066667,5,15,75
+hybrid,0.106667,8,15,75

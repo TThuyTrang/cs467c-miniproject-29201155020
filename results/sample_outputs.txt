@@ -1,0 +1,93 @@
+CS467C - Wellness Habit and Mindfulness Activity Recommender
+Synthetic data demonstration; scores are ranking signals, not health outcomes.
+
+TEST 1: Mood query
+Query: "short evening breathing exercise to reduce exam stress"
+
+Content-based Top 5 (cosine similarity, 0-1)
+1. Comfortable Breathing Pause [I006] | score=0.3981
+   Keywords: breathing, stress
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+2. Consistent Evening Check-In [I025] | score=0.2254
+   Keywords: evening
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+3. Evening Screen Wind-Down [I021] | score=0.2244
+   Keywords: evening
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+4. Tomorrow Preparation Ritual [I022] | score=0.0668
+   Keywords: short
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+5. Campus Loop Walk [I001] | score=0.0608
+   Keywords: short
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+TEST 1 PASSED
+
+TEST 2: Personal history
+In-memory user DEMO_STUDENT likes morning stretching and journaling.
+The catalogue has no literal morning-stretching item; Desk Mobility Break
+is an explicit movement proxy. No existing user is relabeled.
+A second liked movement session makes the fictional active preference explicit.
+History: I002 Desk Mobility Break = 5; I003 Beginner Bodyweight Session = 5;
+         I011 Three Good Moments Journal = 5
+
+Personal-history Top 5 (cosine similarity, 0-1)
+1. Desk Reset [I017] | score=0.1511
+   Keywords: desk, easy, away, small, task
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+2. Single-Task Planning Pause [I018] | score=0.1316
+   Keywords: step, task, write, pause, short
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+3. Window View Break [I019] | score=0.1312
+   Keywords: break, screen, comfortable, away, study
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+4. Campus Loop Walk [I001] | score=0.1310
+   Keywords: break, comfortable, energy, pace, short
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+5. Small Win Reflection [I013] | score=0.1171
+   Keywords: reflection, confidence, small, task
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+Example journal sentiment: positive, score=1.000
+Lexicon explanation: loved (+1), helpful (+1), refreshing (+1)
+TEST 2 PASSED
+
+TEST 3: Zero-rating activity cold start
+I041 exists only in memory; the original CSV catalogue remains unchanged.
+Observed ratings for I041: 0
+Query: "short evening breathing exercise to reduce exam stress"
+
+Content Top 5 (0-1)
+1. Evening Breathing and Exam Stress Pause [I041] | score=0.7665
+   Keywords: breathing, evening, exam, stress, exercise
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+2. Comfortable Breathing Pause [I006] | score=0.2777
+   Keywords: breathing, stress
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+3. Consistent Evening Check-In [I025] | score=0.1612
+   Keywords: evening
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+4. Evening Screen Wind-Down [I021] | score=0.1607
+   Keywords: evening
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+5. Tomorrow Preparation Ritual [I022] | score=0.0510
+   Keywords: short
+   Evidence: TF-IDF cosine similarity to query, activity, or liked history
+
+Hybrid Top 5 (0-1)
+1. Evening Breathing and Exam Stress Pause [I041] | score=0.7665
+   Keywords: breathing, evening, exam, stress, exercise
+   Evidence: Zero-rating activity: available content weight renormalized to 1
+2. Tomorrow Preparation Ritual [I022] | score=0.4480
+   Keywords: short
+   Evidence: Weighted content, collaborative, and observed journal sentiment; CF component uses popularity fallback
+3. Comfortable Breathing Pause [I006] | score=0.4396
+   Keywords: breathing, stress
+   Evidence: Weighted content, collaborative, and observed journal sentiment; CF component uses popularity fallback
+4. Consistent Evening Check-In [I025] | score=0.4392
+   Keywords: evening
+   Evidence: Weighted content, collaborative, and observed journal sentiment; CF component uses popularity fallback
+5. Water Refill Pause [I026] | score=0.4333
+   Keywords: (no shared content terms)
+   Evidence: Weighted content, collaborative, and observed journal sentiment; CF component uses popularity fallback
+TEST 3 PASSED
+
+All three required test cases passed. Demo profiles and new items were not saved.
